@@ -1,0 +1,11 @@
+<div class="fluid-container">
+    <div class="row header pt-3 pl-3 pb-2">
+        <h2>Home</h2>
+    </div>
+    <div class="row post p-2 pl-3 pb-2">
+        <app-post-form rows="2"></app-post-form>
+    </div>
+    <div class="row p-2 pl-3 pb-2" *ngFor="let post of posts">
+        <p>{{ post.textcontent }}</p>
+    </div>
+</div>

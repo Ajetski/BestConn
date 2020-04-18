@@ -1,0 +1,16 @@
+
+div.row {
+    border-bottom: 1px solid var(--superior);
+    margin: 0;
+}
+
+div.row.post {
+    border-bottom: 10px solid #2c3646;
+}
+
+h2 {
+    color: white;
+    font-family: GothamPro, sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+}

@@ -1,1 +1,73 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.css';
+
+
+* {
+    outline: solid 1px red;
+}
+
+
+/* ================================================= */
+/* Global Styles */
+/* ================================================= */
+
+.row {
+    margin: 0 !important;
+}
+
+:root{
+    --bg: #14212c;
+    --highlight-blue: #3060D3;
+    --highlight-bg: #132654;
+    --superior: #515151;
+    --af: #afafaf;
+    --modal-backdrop: #445363; 
+}
+
+body {
+    background-color: var(--bg);
+}
+
+p {
+    color: white;
+}
+
+h2 {
+    color: white;
+}
+
+
+/* ================================================= */
+/* Set Component Widths */
+/* ================================================= */
+
+app-post-form {
+    width: 100%;
+}
+
+
+
+/* ================================================= */
+/* Post Modal Box */
+/* ================================================= */
+
+.post-modal .inside-box {
+    position: absolute;
+}
+
+.post-modal .modal-dialog {
+    max-width: 642px;
+}
+
+.post-modal .modal-header {
+    padding: .5rem 0;
+}
+
+.modal-backdrop {
+    opacity: .2;
+    background-color: var(--modal-backdrop);
+}
+
+.modal-content{
+    background: var(--bg) !important;
+    border-radius: 20px !important;
+}

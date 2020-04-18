@@ -1,0 +1,3 @@
+[submodule "src/WCSUtwitter"]
+	path = src/WCSUtwitter
+	url = https://github.com/Ajetski/WCSUtwitter

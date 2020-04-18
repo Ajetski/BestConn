@@ -1,0 +1,101 @@
+.inside-box {
+    position: absolute;
+}
+
+.post-button {
+    width: fit-content;
+}
+
+.post-button:hover {
+    opacity: .8;
+}
+
+.post-button button {
+    background-color: var(--highlight-bg);
+    border-radius: 15px;
+    align-self: right;
+}
+
+.post-button span {
+    font-weight: 700;
+    color: var(--highlight-blue);;
+}
+
+.post-button i {
+    padding: 0;
+    color: var(--highlight-blue);
+}
+
+i {
+    padding-top: 25%;
+    width: 30px;
+    color: white;
+}
+
+textarea {
+    font-size: 18px;
+    color: white;
+    padding-top: 1rem;
+    padding-left: 4rem;
+    background-color: var(--bg);
+    border: none;
+    resize: none;
+}
+
+textarea::placeholder {
+    font-size: 18px;
+    color: var(--af);
+}
+
+textarea:focus {
+    background-color: var(--bg);
+    outline: none;
+}
+
+.post-options i {
+    color: var(--highlight-blue);
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+    border-radius: 35%;
+    color: white;
+}
+
+.fa {
+    padding-left: .25rem;
+}
+
+.fa-file-image-o {
+    color: var(--highlight-blue);
+    padding-left: .55rem;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: var(--highlight-bg);
+}
+
+.post-button {
+    padding-left: .2rem;
+    padding-right: .8rem;
+}
+
+@media (max-width: 1200px) {
+    .post-text {
+        display: none;
+    }
+
+    .post-button {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}

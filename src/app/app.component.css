@@ -1,0 +1,5 @@
+div.middle {
+    border-left: 1px solid var(--superior);
+    border-right: 1px solid var(--superior);
+    height: 100vh;
+}
