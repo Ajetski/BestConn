@@ -1,3 +1,4 @@
 export interface Post {
-    message:string;
+    message:string,
+    file: File
 }
