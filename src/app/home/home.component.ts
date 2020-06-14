@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PostsService } from '../posts.service';
-
-import { Post } from '../post';
+import { PostsService, Post } from '../posts.service';
 
 @Component({
 	selector: 'app-home',
@@ -14,10 +12,11 @@ export class HomeComponent implements OnInit {
 	constructor(private postsService: PostsService) {}
 
 	ngOnInit(): void {
-		this.getFeed();
+		this.refreshFeed();
 	}
 
-	getFeed(){
+	refreshFeed(){
+		this.posts = [];
 		this.postsService.feed().subscribe(posts => {
 			for(let postId in posts){
 				this.posts.push(posts[postId]);
