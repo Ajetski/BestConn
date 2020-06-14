@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Post } from './post';
+export interface Post {
+    message:string,
+    file: File
+}
 
 @Injectable({
 	providedIn: 'root'
