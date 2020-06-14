@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeFeedService } from '../home-feed.service'
+import { PostsService } from '../posts.service';
+
+import { Post } from '../post';
 
 @Component({
 	selector: 'app-home',
@@ -7,13 +9,20 @@ import { HomeFeedService } from '../home-feed.service'
 	styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-	posts: Object[];
+	posts: Post[] = [];
 	
-	constructor(feed: HomeFeedService) {
-		this.posts = feed.getPosts();
-	}
+	constructor(private postsService: PostsService) {}
 
 	ngOnInit(): void {
+		this.getFeed();
+	}
+
+	getFeed(){
+		this.postsService.feed().subscribe(posts => {
+			for(let postId in posts){
+				this.posts.push(posts[postId]);
+			}
+		});
 	}
 
 }

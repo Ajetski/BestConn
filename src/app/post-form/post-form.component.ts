@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { NgForm } from '@angular/forms';
 
+import { PostsService } from '../posts.service';
+
 @Component({
 	selector: 'app-post-form',
 	templateUrl: './post-form.component.html',
@@ -12,7 +14,7 @@ export class PostFormComponent implements OnInit {
 
 	rows: string;
 
-	constructor(private http: HttpClient) { }
+	constructor(private http: HttpClient, private postsService:PostsService) { }
 
 	ngOnInit(): void {
 	}
@@ -22,12 +24,7 @@ export class PostFormComponent implements OnInit {
 	}
 
 	onPost(form: NgForm) {
-		console.log(form.form.value);
-		this.http.post<{message:string}>('https://ajet-test.firebaseio.com/posts.json', {
-			message: form.form.value.message
-		}).subscribe(resData => {
-			console.log(resData);
-		});
+		this.postsService.create(form.form.value)
 	}
 
 }
