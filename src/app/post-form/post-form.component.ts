@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { NgForm } from '@angular/forms';
 
-import { PostsService } from '../posts.service';
+import { Post, PostsService } from '../posts.service';
 
 @Component({
 	selector: 'app-post-form',
@@ -12,7 +12,9 @@ import { PostsService } from '../posts.service';
 })
 export class PostFormComponent implements OnInit {
 
-	rows: string;
+    rows: string;
+    fileData: string;
+    username = "username";
 
 	constructor(private http: HttpClient, private postsService:PostsService) { }
 
@@ -24,7 +26,24 @@ export class PostFormComponent implements OnInit {
 	}
 
 	onPost(form: NgForm) {
-		this.postsService.create(form.form.value)
-	}
+        const postData: Post = {
+            username: this.username,
+            ...form.form.value,
+            file: this.fileData,
+            timestamp: new Date()
+        };
+		this.postsService.create(postData);
+    }
+    
+    onUpload(event){
+        const fileReader = new FileReader();
+
+        fileReader.addEventListener("load", () => {
+            this.fileData = fileReader.result as string;
+            console.log(this.fileData);
+        }, false);
+
+        fileReader.readAsDataURL(event.target.files[0]);
+    }
 
 }
