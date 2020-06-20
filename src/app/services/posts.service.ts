@@ -5,7 +5,8 @@ import { environment } from 'src/environments/environment';
 export interface Post {
     username: string,
     message:string,
-    file?: File
+    file?: File,
+    timestamp: Date
 }
 
 @Injectable({
