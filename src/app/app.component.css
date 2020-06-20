@@ -3,3 +3,13 @@ div.middle {
     border-right: 1px solid var(--superior);
     height: 100vh;
 }
+
+.left-col {
+    left: 7%;
+}
+
+@media screen and (max-width: 768px) {
+    .left-col {
+        left: -2%;
+    }
+}
