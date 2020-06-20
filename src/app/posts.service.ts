@@ -24,7 +24,7 @@ export class PostsService {
 	}
 
 	feed() {
-		return this.http.get(environment.apiBase + '/posts.json');
+		return this.http.get<Post[]>(environment.apiBase + '/posts.json');
 	}
 
 }
