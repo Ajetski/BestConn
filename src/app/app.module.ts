@@ -12,8 +12,8 @@ import { PostFormComponent } from './post-form/post-form.component';
 import { HomeComponent } from './home/home.component';
 import { ExploreComponent } from './explore/explore.component';
 import { ProfileComponent } from './profile/profile.component';
-import { LoginComponent } from './user-form/login.component';
 import { PostComponent } from './post/post.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -25,8 +25,8 @@ import { PostComponent } from './post/post.component';
     HomeComponent,
     ExploreComponent,
     ProfileComponent,
-    LoginComponent,
     PostComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule, NgbModule, HttpClientModule, FormsModule, RouterModule.forRoot([
