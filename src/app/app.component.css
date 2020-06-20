@@ -4,12 +4,17 @@ div.middle {
     height: 100vh;
 }
 
-.left-col {
-    left: 7%;
+div.left {
+    padding-left: 7%;
 }
 
 @media screen and (max-width: 768px) {
-    .left-col {
-        left: -2%;
+    div.left {
+        padding-left: 0;
     }
+}
+
+app-login {
+    position: fixed;
+    top: 10%;
 }
