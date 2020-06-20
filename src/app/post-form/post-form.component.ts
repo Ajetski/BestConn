@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { NgForm } from '@angular/forms';
 
-import { Post, PostsService } from '../posts.service';
+import { Post, PostsService } from '../services/posts.service';
 
 @Component({
 	selector: 'app-post-form',
