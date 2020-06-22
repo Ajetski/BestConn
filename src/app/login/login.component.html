@@ -3,7 +3,8 @@
 		<p>{{ login ? "Login" : "Sign Up"}}</p>
 	</div>
 	<div class="body pt-2 pl-3 pr-3">
-		<form (ngSubmit)="onLogin(f)" #f="ngForm">
+        <!-- Login Form -->
+		<form *ngIf="login" (ngSubmit)="onLogin(f)" #f="ngForm">
 			<div class="form-group">
 				<label for="email">Email:</label><br>
 				<input type="email" name="email" id="email" email required ngModel>
@@ -12,9 +13,26 @@
 				<label for="password">Password:</label><br>
 				<input type="password" name="password" id="password" required minlength="8" ngModel>
 			</div>
+			<div class="form-group mb-1">
+                <button type="submit" class="btn w-100">Log In</button>
+                <small (click)="login = !login;">Sign Up for Best Conn!</small>
+            </div>
+        </form>
+
+        <!-- Sign Up Form -->
+        <form *ngIf="!login" (ngSubmit)="onLogin(f)" #f="ngForm">
 			<div class="form-group">
-				<button type="submit" class="btn w-100">Log In</button>
+				<label for="email">Email:</label><br>
+				<input type="email" name="email" id="email" email required ngModel>
 			</div>
-		</form>
+			<div class="form-group">
+				<label for="password">Password:</label><br>
+				<input type="password" name="password" id="password" required minlength="8" ngModel>
+			</div>
+			<div class="form-group mb-1">
+                <button type="submit" class="btn w-100">Log In</button>
+                <small (click)="login = !login;">Sign Up for Best Conn!</small>
+            </div>
+        </form>
 	</div>
 </div>
