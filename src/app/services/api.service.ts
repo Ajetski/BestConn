@@ -21,7 +21,6 @@ interface LoginResponse {
 export class ApiService {
 
 	private jwt: string;
-    private refreshToken: string;
     private urlSuffix: string;
     private apiBase = "";
 
@@ -37,22 +36,12 @@ export class ApiService {
     }
 
 	get(url: string) {
-		if(!this.jwt){
-			return throwObservableError({
-				message: "Not authenticated. Please sign in."
-			});
-        }
 		return this.http.get<any>(this.apiBase + url + this.urlSuffix, {
 			params: new HttpParams().set("auth", this.jwt)
 		});
 	}
 
 	post(url: string, body) {
-		if(!this.jwt){
-			return throwObservableError({
-				message: "Not authenticated. Please sign in."
-			});
-		}
 		return this.http.post<any>(this.apiBase + url + this.urlSuffix, body, {
 			params: new HttpParams().set("auth", this.jwt)
 		});
@@ -60,20 +49,40 @@ export class ApiService {
 
 	logIn(loginData) {
 		return this.http.post<LoginResponse>(environment.signInURL, loginData).pipe(tap((resData) => {
-            console.log("login Res data: ", resData);
 			this.jwt = resData.idToken;
-			this.refreshToken = resData.refreshToken;
+		}, (err) => {
+			const resErr = err.error;
+			console.error(resErr.message);
 		}))
 	}
 
 	signUp(signUpData) {
-		this.http.post<LoginResponse>(environment.signInURL, signUpData).subscribe((resData) => {
-			this.jwt = resData.idToken;
-			this.refreshToken = resData.refreshToken;
-		}, (err) => {
-			const resErr = err.error;
-			console.error(resErr.message);
-		});
+		this.http.post<LoginResponse>(environment.signInURL, signUpData).pipe(
+			tap((resData) => {
+				this.jwt = resData.idToken;
+			}, (err) => {
+				const resErr = err.error;
+				console.error(resErr.message);
+			})
+		);
+	}
+
+	refreshToken(token: string) {
+		return this.http.post<any>(environment.refreshURL, {
+			grant_type: "refresh_token",
+			refresh_token: token
+		}).pipe(
+			tap((resData) => {
+				this.jwt = resData.idToken;
+			}, (err) => {
+				const resErr = err.error;
+				console.error(resErr.message);
+			})
+		);
+	}
+
+	loadFromStorage() {
+		this.jwt = localStorage.getItem('jwt');
 	}
 
 }
