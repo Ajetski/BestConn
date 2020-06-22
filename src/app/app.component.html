@@ -1,4 +1,4 @@
-<div class="row">
+<div *ngIf="userService.loggedIn" class="row">
     <div class="col-lg-3 col-2 left">
         <app-navbar></app-navbar>
     </div>
@@ -6,6 +6,9 @@
         <router-outlet></router-outlet>
     </div>
     <div class="col-lg-4 d-none d-lg-block right">
-        <app-login></app-login>
+        <!--<app-login></app-login>-->
     </div>
+</div>
+<div *ngIf="!userService.loggedIn">
+    <app-login></app-login>
 </div>
