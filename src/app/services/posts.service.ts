@@ -17,7 +17,7 @@ export class PostsService {
 	constructor(private apiService: ApiService) { }
 
 	create(postData: Post) {
-        return this.apiService.post('/posts');
+        return this.apiService.post('/posts', postData);
 	}
 
 	feed() {

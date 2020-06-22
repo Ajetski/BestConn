@@ -32,7 +32,11 @@ export class PostFormComponent implements OnInit {
             file: this.fileData,
             timestamp: new Date()
         };
-		this.postsService.create(postData);
+		this.postsService.create(postData).subscribe((resData) => {
+            console.log("message posted: ", resData);
+        }, (err) => {
+            console.error(err);
+        });
     }
     
     onUpload(event){
@@ -40,7 +44,7 @@ export class PostFormComponent implements OnInit {
 
         fileReader.addEventListener("load", () => {
             this.fileData = fileReader.result as string;
-            console.log(this.fileData);
+            console.log("File has been read.");
         }, false);
 
         fileReader.readAsDataURL(event.target.files[0]);

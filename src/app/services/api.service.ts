@@ -47,13 +47,15 @@ export class ApiService {
 		});
 	}
 
-	post(url: string) {
+	post(url: string, body) {
 		if(!this.jwt){
 			return throwObservableError({
 				message: "Not authenticated. Please sign in."
 			});
 		}
-		return this.http.get<any>(this.apiBase + url + this.urlSuffix);
+		return this.http.post<any>(this.apiBase + url + this.urlSuffix, body, {
+			params: new HttpParams().set("auth", this.jwt)
+		});
 	}
 
 	logIn(loginData) {
