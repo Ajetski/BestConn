@@ -32,4 +32,8 @@ export class HomeComponent implements OnInit {
         });
 	}
 
+	addLocalPost(post: Post) {
+		this.posts.unshift(post);
+	}
+
 }

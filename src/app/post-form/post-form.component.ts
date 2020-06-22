@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { NgForm } from '@angular/forms';
 
@@ -7,12 +7,12 @@ import { Post, PostsService } from '../services/posts.service';
 @Component({
 	selector: 'app-post-form',
 	templateUrl: './post-form.component.html',
-	styleUrls: ['./post-form.component.css'],
-	inputs: ['rows']
+	styleUrls: ['./post-form.component.css']
 })
 export class PostFormComponent implements OnInit {
+    @Input('rows') rows: string;
+    @Output() addLocalPost: EventEmitter<Post> = new EventEmitter<Post>();
 
-    rows: string;
     fileData: string;
     username = "username";
 
@@ -34,6 +34,7 @@ export class PostFormComponent implements OnInit {
         };
 		this.postsService.create(postData).subscribe((resData) => {
             console.log("message posted: ", resData);
+            this.addLocalPost.emit(postData);
         }, (err) => {
             console.error(err);
         });
