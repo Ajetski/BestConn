@@ -1,0 +1,29 @@
+.box {
+    border: 1px solid gray;
+    border-radius: 15px;
+    width: fit-content;
+}
+
+label {
+    color: white;
+    margin-right: 1%;
+}
+
+input {
+    font-size: 18px;
+    /*color: white;*/
+    background-color: var(--af);
+    border: none;
+    resize: none;
+}
+
+button {
+    background-color: var(--highlight-bg);
+    color: var(--highlight-blue);
+    font-weight: bolder;
+    border-radius: 15px;
+}
+
+.header {
+    border-bottom: 1px solid gray;
+}
