@@ -3,8 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  apiBase: "https://bestconn-wcsu.firebaseio.com"
+	production: false,
+
+	defaultApiBase: "https://bestconn-wcsu.firebaseio.com",
+	firestoreApiBase: "https://firestore.googleapis.com/v1/projects/bestconn-wcsu/databases/(default)/documents",
+	useFirestore: false,
+
+	signInURL: "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDBoInx8iZZd5eoHTERXEzA7vaBjkR40Ss",
+	signUpURL: "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDBoInx8iZZd5eoHTERXEzA7vaBjkR40Ss",
+
+	
 };
 
 /*

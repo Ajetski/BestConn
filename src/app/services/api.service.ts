@@ -21,17 +21,28 @@ interface LoginResponse {
 export class ApiService {
 
 	private jwt: string;
-	private refreshToken: string;
+    private refreshToken: string;
+    private urlSuffix: string;
+    private apiBase = "";
 
-	constructor(private http: HttpClient) { }
+	constructor(private http: HttpClient) {
+        if(environment.useFirestore){
+            this.urlSuffix = "";
+            this.apiBase = environment.firestoreApiBase;
+        }
+        else {
+            this.urlSuffix = ".json";
+            this.apiBase = environment.defaultApiBase;
+        }
+    }
 
 	get(url: string) {
 		if(!this.jwt){
 			return throwObservableError({
 				message: "Not authenticated. Please sign in."
 			});
-		}
-		return this.http.get<any>(environment.apiBase + url, {
+        }
+		return this.http.get<any>(this.apiBase + url + this.urlSuffix, {
 			params: new HttpParams().set("auth", this.jwt)
 		});
 	}
@@ -42,7 +53,7 @@ export class ApiService {
 				message: "Not authenticated. Please sign in."
 			});
 		}
-		return this.http.get<any>(environment.apiBase + url);
+		return this.http.get<any>(this.apiBase + url + this.urlSuffix);
 	}
 
 	logIn(loginData) {
