@@ -11,6 +11,7 @@ export const environment = {
 
 	signInURL: "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDBoInx8iZZd5eoHTERXEzA7vaBjkR40Ss",
 	signUpURL: "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDBoInx8iZZd5eoHTERXEzA7vaBjkR40Ss",
+	refreshURL: "https://securetoken.googleapis.com/v1/token?key=AIzaSyDBoInx8iZZd5eoHTERXEzA7vaBjkR40Ss"
 
 	
 };
