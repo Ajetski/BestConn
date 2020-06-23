@@ -61,8 +61,7 @@ export class ApiService {
 			tap((resData) => {
 				this.jwt = resData.idToken;
 			}, (err) => {
-				const resErr = err.error;
-				console.error(resErr.message);
+				console.error(err);
 			})
 		);
 	}
@@ -75,8 +74,7 @@ export class ApiService {
 			tap((resData) => {
 				this.jwt = resData.idToken;
 			}, (err) => {
-				const resErr = err.error;
-				console.error(resErr.message);
+				console.error(err);
 			})
 		);
 	}

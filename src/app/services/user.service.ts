@@ -21,7 +21,7 @@ export class UserService {
         const expireTime = +localStorage.getItem('expireTime');
 
         if(expireTime) {
-            if(expireTime > new Date().getMilliseconds()) {
+            if(expireTime > new Date().getTime()) {
                 this._loggedIn = true;
                 apiService.loadFromStorage();
             }
@@ -39,8 +39,12 @@ export class UserService {
 		this.apiService.logIn(loginData).subscribe((resData) => {
             this._loggedIn = true;
             console.log("Logged in.");
+            
+            const expireTime = new Date().getTime() + (+resData.expiresIn * 1000);
 
-            const expireTime = new Date().getMilliseconds() + (+resData.expiresIn * 1000);
+            console.log('jwt', resData.idToken);
+            console.log('expireTime', expireTime.toString());
+            console.log('refreshToken', resData.refreshToken);
 
 			localStorage.setItem('jwt', resData.idToken);
 			localStorage.setItem('expireTime', expireTime.toString());
@@ -48,14 +52,16 @@ export class UserService {
 
 			setTimeout(() => {
                 this.refreshToken();
-			}, +resData.expiresIn);
+			}, +resData.expiresIn * 1000);
         },
         err => {
             console.error("Login Error: ", err);
+            this._loggedIn = false;
         });
     }
 
 	logout() {
+        this._loggedIn = false;
         localStorage.removeItem('jwt');
         localStorage.removeItem('expireTime');
         localStorage.removeItem('refreshToken');
@@ -64,9 +70,8 @@ export class UserService {
     refreshToken() {
         this.apiService.refreshToken(localStorage.getItem('refreshToken')).subscribe((resData) => {
             this._loggedIn = true;
-            console.log("REFRESH, Logged in.");
-
-            const expireTime = new Date().getMilliseconds() + (+resData.expiresIn * 1000);
+            
+            const expireTime = new Date().getTime() + (+resData.expiresIn * 1000);
 
 			localStorage.setItem('jwt', resData.idToken);
 			localStorage.setItem('expireTime', expireTime.toString());
@@ -78,6 +83,7 @@ export class UserService {
         },
         err => {
             console.error("Login Error: ", err);
+            this._loggedIn = false;
         });;
     }
     
