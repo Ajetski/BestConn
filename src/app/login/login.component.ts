@@ -27,9 +27,9 @@ export class LoginComponent implements OnInit {
 
 		}
 		else {
-			console.log("FROM IS INVALID!");
+			console.log("Login Form is Invalid!");
 		}
-		
+		form.reset();
 	}
 
 }

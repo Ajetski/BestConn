@@ -28,10 +28,11 @@ export class PostFormComponent implements OnInit {
 	onPost(form: NgForm) {
         const postData: Post = {
             username: this.username,
-            ...form.form.value,
+            message: form.form.value.message,
             file: this.fileData,
             timestamp: new Date()
         };
+        form.reset();
 		this.postsService.create(postData).subscribe((resData) => {
             console.log("message posted: ", resData);
             this.addLocalPost.emit(postData);
