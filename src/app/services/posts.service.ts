@@ -5,7 +5,7 @@ import { ApiService } from './api.service';
 export interface Post {
     username: string,
     message:string,
-    file?: File,
+    file?: string,
     timestamp: Date
 }
 
