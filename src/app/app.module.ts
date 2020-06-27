@@ -5,6 +5,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+import { AngularFireModule } from '@angular/fire'
+import { AngularFirestoreModule } from '@angular/fire/firestore'
+
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SearchComponent } from './search/search.component';
@@ -14,31 +17,34 @@ import { ExploreComponent } from './explore/explore.component';
 import { ProfileComponent } from './profile/profile.component';
 import { PostComponent } from './post/post.component';
 import { LoginComponent } from './login/login.component';
+import { environment } from 'src/environments/environment';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-    SearchComponent,
-    PostFormComponent,
-    HomeComponent,
-    ExploreComponent,
-    ProfileComponent,
-    PostComponent,
-    LoginComponent
-  ],
-  imports: [
-    BrowserModule, NgbModule, HttpClientModule, FormsModule, RouterModule.forRoot([
-      { path: '', redirectTo: '/home', pathMatch: 'full' },
-      { path: 'home', component: HomeComponent },
-      { path: 'explore', component: ExploreComponent },
-      { path: 'profile', component: ProfileComponent },
-      { path: 'login', component: LoginComponent }
-    ],
-    { enableTracing: true})
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		NavbarComponent,
+		SearchComponent,
+		PostFormComponent,
+		HomeComponent,
+		ExploreComponent,
+		ProfileComponent,
+		PostComponent,
+		LoginComponent
+	],
+	imports: [
+		BrowserModule, NgbModule, HttpClientModule, FormsModule, RouterModule.forRoot([
+			{ path: '', redirectTo: '/home', pathMatch: 'full' },
+			{ path: 'home', component: HomeComponent },
+			{ path: 'explore', component: ExploreComponent },
+			{ path: 'profile', component: ProfileComponent },
+			{ path: 'login', component: LoginComponent }
+		],
+			{ enableTracing: true }),
+		AngularFireModule.initializeApp(environment.firebase),
+		AngularFirestoreModule
+	],
+	providers: [],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }

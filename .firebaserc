@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "bestconn-wcsu": {
+      "hosting": {
+        "BestConn": [
+          "bestconn-wcsu"
+        ]
+      }
+    }
+  }
+}

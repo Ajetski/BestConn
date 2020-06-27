@@ -3,17 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-	production: false,
-
-	defaultApiBase: "https://bestconn-wcsu.firebaseio.com",
-	firestoreApiBase: "https://firestore.googleapis.com/v1/projects/bestconn-wcsu/databases/(default)/documents",
-	useFirestore: false,
-
-	signInURL: "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDBoInx8iZZd5eoHTERXEzA7vaBjkR40Ss",
-	signUpURL: "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDBoInx8iZZd5eoHTERXEzA7vaBjkR40Ss",
-	refreshURL: "https://securetoken.googleapis.com/v1/token?key=AIzaSyDBoInx8iZZd5eoHTERXEzA7vaBjkR40Ss"
-
-	
+  production: false,
+  firebase: {
+    apiKey: "AIzaSyDBoInx8iZZd5eoHTERXEzA7vaBjkR40Ss",
+    authDomain: "bestconn-wcsu.firebaseapp.com",
+    databaseURL: "https://bestconn-wcsu.firebaseio.com",
+    projectId: "bestconn-wcsu",
+    storageBucket: "bestconn-wcsu.appspot.com",
+    messagingSenderId: "801040037707",
+    appId: "1:801040037707:web:5adb7000b66a3bca7f5ace",
+    measurementId: "G-PC9SD34CXH"
+  }  
 };
 
 /*

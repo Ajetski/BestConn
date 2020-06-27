@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
 import { NgForm } from '@angular/forms';
 
-import { Post, PostsService } from '../services/posts.service';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+
+import { Post } from '../datatypes/post';
 
 @Component({
 	selector: 'app-post-form',
@@ -15,8 +16,11 @@ export class PostFormComponent implements OnInit {
 
     fileData: string;
     username = "username";
+    postsCollection: AngularFirestoreCollection
 
-	constructor(private http: HttpClient, private postsService:PostsService) { }
+	constructor(private firestore: AngularFirestore) {
+        this.postsCollection = this.firestore.collection<Post>('posts');
+    }
 
 	ngOnInit(): void {
 	}
@@ -29,15 +33,13 @@ export class PostFormComponent implements OnInit {
         const postData: Post = {
             username: this.username,
             message: form.form.value.message,
-            file: this.fileData,
-            timestamp: new Date()
+            timestamp: new Date().getTime()
         };
         form.reset();
-		this.postsService.create(postData).subscribe((resData) => {
-            console.log("message posted: ", resData);
-            this.addLocalPost.emit(postData);
-        }, (err) => {
-            console.error(err);
+        this.postsCollection.add(postData).then(data => {
+            console.log(data);
+        }).catch(err => {
+            console.log(err);
         });
     }
     
