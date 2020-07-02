@@ -4,8 +4,9 @@
 <div *ngIf="post.message" class="pl-3">
     <p>{{ post.message }}</p>
 </div>
-<div *ngIf="post.file" class="pl-3">
-    <img [src]="post.file" height="100">
+<div *ngIf="!!post.file" class="pl-3 pb-2 image-container">
+    <img [src]="post.fileUrl | async" width="75%">
+    <mat-spinner *ngIf="!imageLoaded"></mat-spinner>
 </div>
 <div class="pl-3">
     <p class="date pr-2"><em>Posted at {{ post.timestamp | date:'short'}}</em></p>

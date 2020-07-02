@@ -10,8 +10,8 @@
 
 :root{
     --bg: #14212c;
-    --highlight-blue: #3060D3;
-    --highlight-bg: #132654;
+    --highlight-blue: #417aff;
+    --highlight-bg: #012a8b;
     --superior: #515151;
     --af: #afafaf;
     --modal-backdrop: #445363; 
@@ -65,3 +65,5 @@ app-post-form {
     background: var(--bg) !important;
     border-radius: 20px !important;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -14,3 +14,18 @@ h2 {
     font-weight: 800;
     font-size: 20px;
 }
+
+button {
+    background-color: var(--highlight-bg);
+    color: var(--highlight-blue);
+    font-weight: bolder;
+    opacity: 1;
+}
+
+button:hover {
+    color: white;
+}
+
+mat-spinner {
+    margin: auto;
+}

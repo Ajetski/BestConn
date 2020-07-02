@@ -1,34 +1,46 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { AngularFirestore } from '@angular/fire/firestore'
+import { Post } from '../models/post';
+import { PostService } from '../services/post.service';
+import { Subscription } from 'rxjs';
 
-import { Post } from '../datatypes/post';
+import { AngularFireStorage, AngularFireStorageModule } from '@angular/fire/storage';
 
 @Component({
 	selector: 'app-home',
 	templateUrl: './home.component.html',
 	styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
-    posts;
-    feedErrorMessage: string;
-    
-    
-	constructor(firestore: AngularFirestore) {
-		this.posts = firestore.collection('posts').valueChanges();
-	}
+export class HomeComponent implements OnInit, OnDestroy {
+
+    posts: Post[] = [];
+	updatesAvailable = false;
+	private subs: Subscription[] = [];
+
+	constructor(private postService: PostService, private storage: AngularFireStorage) {}
 
 	ngOnInit(): void {
+		this.refreshFeed();
+		this.subs.push(this.postService.localPostToHomeFeed.subscribe(post => {
+			this.posts.unshift(post);
+		}));
 	}
 
-	refreshFeed(){
-        console.log("refreshing feed...");
+	ngOnDestroy(): void {
+		this.subs.forEach(sub => sub.unsubscribe());
+	}
+
+	refreshFeed(): void {
 		this.posts = [];
-	}
-
-	addLocalPost(post: Post) {
-		this.posts.unshift(post);
+		this.postService.homeFeed().forEach(data => {
+			data.docs.forEach(doc => {
+				let post = doc.data() as Post;
+				if(post.file) {
+					post.fileUrl = this.storage.ref('posts/' + doc.id + '.png').getDownloadURL();
+				}
+				this.posts.push(post);
+			})
+		});
 	}
 
 }

@@ -1,9 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-
-import { Post } from '../datatypes/post';
+import { Post } from '../models/post';
+import { PostService } from '../services/post.service';
 
 @Component({
 	selector: 'app-post-form',
@@ -11,47 +10,33 @@ import { Post } from '../datatypes/post';
 	styleUrls: ['./post-form.component.css']
 })
 export class PostFormComponent implements OnInit {
-    @Input('rows') rows: string;
-    @Output() addLocalPost: EventEmitter<Post> = new EventEmitter<Post>();
+    @Input('rows') rows: number;
+    @Output() emitPost: EventEmitter<Post> = new EventEmitter<Post>();
 
-    fileData: string;
-    username = "username";
-    postsCollection: AngularFirestoreCollection
+    file: File;
 
-	constructor(private firestore: AngularFirestore) {
-        this.postsCollection = this.firestore.collection<Post>('posts');
-    }
+	constructor(private postService: PostService) {}
 
 	ngOnInit(): void {
 	}
 
-	numRows(): number {
-		return parseInt(this.rows);
-	}
-
 	onPost(form: NgForm) {
-        const postData: Post = {
-            username: this.username,
-            message: form.form.value.message,
+        const post: Post = {
+            username: 'username',
+            file: !!this.file,
+            message: form.form.value.message as string,
             timestamp: new Date().getTime()
         };
+
         form.reset();
-        this.postsCollection.add(postData).then(data => {
-            console.log(data);
-        }).catch(err => {
-            console.log(err);
-        });
+
+        this.emitPost.emit(post);
+
+        this.postService.create(post, this.file);
     }
     
     onUpload(event){
-        const fileReader = new FileReader();
-
-        fileReader.addEventListener("load", () => {
-            this.fileData = fileReader.result as string;
-            console.log("File has been read.");
-        }, false);
-
-        fileReader.readAsDataURL(event.target.files[0]);
+        this.file = event.target.files[0];
     }
 
 }

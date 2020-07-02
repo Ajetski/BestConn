@@ -1,5 +1,11 @@
 img {
-    border-radius: 15px;
+    border-radius: 25px;
+    border: 1px grey solid;
+    margin: auto;
+}
+
+.image-container {
+    text-align: center;
 }
 
 .date {

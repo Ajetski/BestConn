@@ -1,7 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Location } from '@angular/common';
 import { Router } from "@angular/router";
+
+import { Post } from '../models/post';
 
 @Component({
 	selector: "app-navbar",
@@ -10,8 +12,7 @@ import { Router } from "@angular/router";
 })
 
 export class NavbarComponent implements OnInit {
-	public active: string;
-	public test:string;
+	active: string;
 
 	constructor(location: Location, router: Router, config: NgbModalConfig, private modalService: NgbModal) {
 		router.events.subscribe(val => {
@@ -32,5 +33,9 @@ export class NavbarComponent implements OnInit {
 		windowClass: 'post-modal',
 		size: 'md'
 		});
+	}
+
+	test() {
+		console.log('close modal');
 	}
 }

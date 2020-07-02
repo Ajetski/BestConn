@@ -5,8 +5,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { AngularFireModule } from '@angular/fire'
 import { AngularFirestoreModule } from '@angular/fire/firestore'
+import { AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -18,6 +23,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { PostComponent } from './post/post.component';
 import { LoginComponent } from './login/login.component';
 import { environment } from 'src/environments/environment';
+
 
 
 @NgModule({
@@ -42,9 +48,13 @@ import { environment } from 'src/environments/environment';
 		],
 			{ enableTracing: true }),
 		AngularFireModule.initializeApp(environment.firebase),
-		AngularFirestoreModule
+		AngularFirestoreModule,
+		AngularFireStorageModule,
+		AngularFireAuthModule,
+		BrowserAnimationsModule,
+		MatProgressSpinnerModule
 	],
-	providers: [],
+	providers: [{ provide: BUCKET, useValue: 'bestconn-wcsu.appspot.com' }],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

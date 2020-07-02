@@ -4,18 +4,14 @@
 				<button class="btn" (click)="d('Cross click')"><i class="fa fa-times" aria-hidden="true"></i></button>
 		</div>
 		<div class="modal-body">
-			<app-post-form rows="7"></app-post-form>
+			<app-post-form rows="7" (emitPost)="c()"></app-post-form>
 		</div>
 	</div>
 </ng-template>
 
 <nav class="navbar sticky-top">
 	<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
-		<li>
-			{{test}}
-		</li>
 		<li ngbNavItem="logo">
-			<!--<a ngbNavLink routerLink="/home"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>-->
 			<a ngbNavLink routerLink="/home"><img src="https://cdn.betterttv.net/emote/5ada077451d4120ea3918426/2x"></a>
 		</li>
 		<li ngbNavItem="home">
