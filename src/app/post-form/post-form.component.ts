@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 
 import { Post } from '../models/post';
 import { PostService } from '../services/post.service';
+import { UserService } from '../services/user.service';
 
 @Component({
 	selector: 'app-post-form',
@@ -15,17 +16,19 @@ export class PostFormComponent implements OnInit {
 
     file: File;
 
-	constructor(private postService: PostService) {}
+	constructor(private postService: PostService, private userService: UserService) {}
 
 	ngOnInit(): void {
 	}
 
 	onPost(form: NgForm) {
         const post: Post = {
-            username: 'username',
+            userUid: this.userService.user.uid,
+            username: this.userService.user.username,
             file: !!this.file,
             message: form.form.value.message as string,
-            timestamp: new Date().getTime()
+            timestamp: new Date().getTime(),
+            followers: this.userService.user.followers
         };
 
         form.reset();

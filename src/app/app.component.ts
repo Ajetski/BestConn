@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
+import { UserService } from './services/user.service';
 
 @Component({
 	selector: 'app-root',
@@ -10,11 +10,5 @@ import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
 export class AppComponent {
 	title = 'BestConn';
 
-	constructor(public auth: AngularFireAuth) {
-		auth.signInWithEmailAndPassword('test@email.com', '12345678').then(() => {
-			console.log("Logged in.");
-		}).catch((err) => {
-			console.error("Error logging in: ", err);
-		});
-	}
+	constructor(public userService: UserService) {}
 }

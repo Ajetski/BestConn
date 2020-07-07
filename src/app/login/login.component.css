@@ -16,6 +16,9 @@ input {
     background-color: var(--af);
     border: none;
     resize: none;
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: .25rem;
 }
 
 button {
@@ -29,8 +32,9 @@ button:hover {
     color: var(--af);
 }
 
-.header {
-    border-bottom: 1px solid gray;
+.body {
+    border-top: 1px solid gray;
+    width: 100%;
 }
 
 small {
@@ -41,3 +45,28 @@ small:hover {
     text-decoration: underline;
     cursor: pointer;
 }
+
+textarea {
+    width: 100%;
+}
+
+.sign-up .form-group {
+    border: 1px grey solid;
+    border-radius: 10px;
+    padding: .5rem;
+    margin-bottom: .5rem;
+    margin-top: .5rem;
+}
+
+.sign-up .form-group.submit-group {
+    border: 0;
+}
+
+.sign-up input.ng-untouched:invalid {
+    border: 0;
+}
+
+.sign-up input.ng-touched:invalid {
+    border: 1px red solid;
+}
+
