@@ -13,7 +13,7 @@ import { AngularFireStorage, AngularFireStorageModule } from '@angular/fire/stor
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
-    posts: Post[] = [];
+    posts: Post[];
 	updatesAvailable = false;
 	private subs: Subscription[] = [];
 
@@ -31,15 +31,20 @@ export class HomeComponent implements OnInit, OnDestroy {
 	}
 
 	refreshFeed(): void {
-		this.posts = [];
+        if(!!this.posts)
+            this.posts = [];
 		this.postService.homeFeed().forEach(data => {
 			data.docs.forEach(doc => {
 				let post = doc.data() as Post;
 				if(post.file) {
-					post.fileUrl = this.storage.ref('posts/' + doc.id + '.png').getDownloadURL();
-				}
+					post.fileUrl = this.storage.ref('posts/' + doc.id).getDownloadURL();
+                }
+                if(!this.posts)
+                    this.posts = [];
 				this.posts.push(post);
-			})
+            })
+            if(!this.posts)
+                this.posts = [];
 		});
 	}
 
