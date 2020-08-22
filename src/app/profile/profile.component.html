@@ -1,3 +1,6 @@
-<p>profile works!</p>
-<p *ngIf="test">{{test}}</p>
-<p *ngIf="!test">loading...</p>
+<div class="pl-3 pt-3">
+    <p>Username: {{userService.user.username}}</p>
+    <p *ngIf="userService.user.bio">Bio: {{userService.user.bio}}</p>
+    <p>Follower Count: {{userService.user.followers.length}}</p>
+    <p>Following Count: {{userService.user.following.length}}</p>
+</div>
