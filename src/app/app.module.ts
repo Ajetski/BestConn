@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -23,6 +23,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { PostComponent } from './post/post.component';
 import { LoginComponent } from './login/login.component';
 import { environment } from 'src/environments/environment';
+import { GlobalErrorHandler } from './error-handler';
+import { HubComponent } from './hub/hub.component';
 
 
 
@@ -36,7 +38,8 @@ import { environment } from 'src/environments/environment';
 		ExploreComponent,
 		ProfileComponent,
 		PostComponent,
-		LoginComponent
+		LoginComponent,
+		HubComponent
 	],
 	imports: [
 		BrowserModule, NgbModule, HttpClientModule, FormsModule, RouterModule.forRoot([
@@ -54,7 +57,10 @@ import { environment } from 'src/environments/environment';
 		BrowserAnimationsModule,
 		MatProgressSpinnerModule
 	],
-	providers: [{ provide: BUCKET, useValue: 'bestconn-wcsu.appspot.com' }],
+	providers: [
+        { provide: BUCKET, useValue: 'bestconn-wcsu.appspot.com' }, 
+        { provide: ErrorHandler, useClass: GlobalErrorHandler }
+    ],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }
