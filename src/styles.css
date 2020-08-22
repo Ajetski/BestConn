@@ -4,6 +4,10 @@
 /* Global Styles */
 /* ================================================= */
 
+* {
+    color: white;
+}
+
 .row {
     margin: 0 !important;
 }
@@ -14,19 +18,39 @@
     --highlight-bg: #012a8b;
     --superior: #515151;
     --af: #afafaf;
-    --modal-backdrop: #445363; 
+    --modal-backdrop: #445363;
+    --error-red: #9e0c0c;
 }
 
 body {
     background-color: var(--bg);
 }
 
-p {
-    color: white;
+label {
+    margin: 0 !important;
 }
 
-h2 {
+.btn.btn-primary {
+    color: white !important;
+    background-color: var(--bg) !important;
+    border: 1px grey solid !important;
+    width: max-content;
+}
+
+.btn.btn-primary:hover {
+    background-color: var(--highlight-bg) !important;
+    border: 1px grey solid !important;
+    opacity: 80% !important;
+}
+
+input[type=file] {
+    display: none !important;
+}
+
+i.fa {
+    width: 30px;
     color: white;
+    padding: 0 !important;
 }
 
 
