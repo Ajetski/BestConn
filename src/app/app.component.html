@@ -1,15 +1,22 @@
-<div *ngIf="userService.loggedIn" class="row">
+<div *ngIf="userService.isInitializing" class="initializing">
+    <img class="mr-5" src="https://cdn.betterttv.net/emote/5ada077451d4120ea3918426/2x">
+    <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="!userService.isInitializing && userService.loggedIn" class="row">
     <div class="col-lg-3 col-2 left">
         <app-navbar></app-navbar>
     </div>
-    <div class="col-lg-5 col-10 middle pl-0 pr-0">
+    <div class="col-lg-6 col-10 middle pl-0 pr-0">
         <router-outlet></router-outlet>
     </div>
-    <div class="col-lg-4 d-none d-lg-block right">
-        <!--<app-login></app-login>-->
+    <div class="col-lg-3 d-none d-lg-block right">
+        <div class="m-auto" style="width:fit-content;">
+            <app-hub></app-hub>
+        </div>
+        
     </div>
 </div>
-<div *ngIf="!userService.loggedIn">
+<div *ngIf="!userService.isInitializing && !userService.loggedIn">
     <div style="padding-top: 1%; text-align: center;">
         <h2><img src="https://cdn.betterttv.net/emote/5ada077451d4120ea3918426/2x">&nbsp;BestConn</h2>
     </div>

@@ -8,6 +8,17 @@ div.left {
     padding-left: 7%;
 }
 
+div.right {
+    align-content: center;
+}
+
+div.initializing {
+    display: flex;
+    margin: auto;
+    margin-top: 40vh;
+    width: fit-content;
+}
+
 @media screen and (max-width: 768px) {
     div.left {
         padding-left: 0;
