@@ -13,7 +13,9 @@ export const environment = {
 		messagingSenderId: "801040037707",
 		appId: "1:801040037707:web:5adb7000b66a3bca7f5ace",
 		measurementId: "G-PC9SD34CXH"
-	}
+    },
+    loggingURL: "https://discordapp.com/api/webhooks/745678769641226380/O1QltaWDTvoFgGD1lu3ZkDn28XBuUs0Xt3X9MiYEs-ob5z0Q7yFxFUhaIsgnO3d2snnS"
+    
 };
 
 /*
