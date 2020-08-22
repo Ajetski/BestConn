@@ -12,7 +12,7 @@ label {
 
 input {
     font-size: 18px;
-    /*color: white;*/
+    color: black;
     background-color: var(--af);
     border: none;
     resize: none;
@@ -62,11 +62,11 @@ textarea {
     border: 0;
 }
 
-.sign-up input.ng-untouched:invalid {
+.sign-up input.ng-untouched.ng-invalid {
     border: 0;
 }
 
-.sign-up input.ng-touched:invalid {
-    border: 1px red solid;
+.sign-up input.ng-touched.ng-invalid {
+    border-left: 10px var(--error-red) solid;
 }
 
