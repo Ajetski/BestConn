@@ -25,21 +25,25 @@ export class PostService {
 		return this.postsCollection.get();
 	}
 
-	create(post: Post, file?: File) {
-		console.log("posting: ", post, file);
-		this.postsCollection.add(post).then((docRef) => {
-			if(!!file) {
-				console.log("uploading file");
-				this.storage.upload('posts/' + docRef.id + '.png', file).then(() => {
-					post.fileUrl = this.storage.ref('posts/' + docRef.id + '.png').getDownloadURL();
-					this._localPostToHomeFeed.next(post);
-				}).catch( err => {
-					console.error('Uploading error: ', err);
-				});
-			}
-			else {
-				this._localPostToHomeFeed.next(post);
-			}
-		});
+	async create(post: Post, file?: File) {
+        try {
+            const docRef = await this.postsCollection.add(post);
+            if(!!file) {
+                try {
+                    await this.storage.upload('posts/' + docRef.id, file);
+                    post.fileUrl = this.storage.ref('posts/' + docRef.id ).getDownloadURL();
+                    this._localPostToHomeFeed.next(post);
+                }
+                catch (err) {
+                    console.error('Uploading error: ', err);
+                }
+            }
+            else {
+                this._localPostToHomeFeed.next(post);
+            }
+        }
+        catch (err) {
+            console.error("Error posting message: ", err);
+        }
 	}
 }
