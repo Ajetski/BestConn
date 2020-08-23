@@ -1,9 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from "@angular/core";
-import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Location } from '@angular/common';
+import { NgbModal, NgbNavChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from "@angular/router";
-
-import { Post } from '../models/post';
 
 @Component({
 	selector: "app-navbar",
@@ -14,28 +11,27 @@ import { Post } from '../models/post';
 export class NavbarComponent implements OnInit {
 	active: string;
 
-	constructor(location: Location, router: Router, config: NgbModalConfig, private modalService: NgbModal) {
-		router.events.subscribe(val => {
-			if (location.path().includes('explore')) {
-			  this.active = 'explore';
-			} else if (location.path().includes('profile')) {
-				this.active = 'profile';
-			} else {
-			  this.active = "home";
-			}
-		  });
+	constructor(router: Router, private modalService: NgbModal) {
+		const base = router.url.split('/');
+		if(!base || base.length < 2) {
+			this.active = "home";
+		} else {
+			this.active = base[1];
+		}
 	}
 
-	ngOnInit(): void {}
+	ngOnInit(): void { }
 
 	open(content) {
 		this.modalService.open(content, {
-		windowClass: 'post-modal',
-		size: 'md'
+			windowClass: 'post-modal',
+			size: 'md'
 		});
 	}
 
-	test() {
-		console.log('close modal');
+	onNavChange(changeEvent: NgbNavChangeEvent) {
+		if (changeEvent.nextId === "post") {
+			changeEvent.preventDefault();
+		}
 	}
 }
