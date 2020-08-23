@@ -14,10 +14,9 @@ export class GlobalErrorHandler implements ErrorHandler {
         this.logger.log("Error: ```" + errMessage  + "```User: ```" + localStorage.getItem('user') + "```");
 
         // sign out to avoid repeat issues. this resets login state for the user
-        this.userService.signOut();
-
-        // prevent error from being burried
-		throw error;
+        this.userService.signOut().then(() => {
+            throw error;
+        })
 	}
 
 }
