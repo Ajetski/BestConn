@@ -1,7 +1,7 @@
-<ng-template #content let-c="close" let-d="dismiss" style="background-color: var(--bg); border-radius: 4%;">
+<ng-template #content let-c="close" let-d="dilgiss" style="background-color: var(--bg); border-radius: 4%;">
 	<div class="modal-box">
 		<div class="modal-header">
-				<button class="btn" (click)="d('Cross click')"><i class="fa fa-times" aria-hidden="true"></i></button>
+				<button class="btn" (click)="c()"><i class="fa fa-times" aria-hidden="true"></i></button>
 		</div>
 		<div class="modal-body">
 			<app-post-form rows="7" (emitPost)="c()"></app-post-form>
@@ -10,21 +10,36 @@
 </ng-template>
 
 <nav class="navbar sticky-top">
-	<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
+	<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" (navChange)="onNavChange($event)" orientation="vertical">
 		<li ngbNavItem="logo">
-			<a ngbNavLink routerLink="/home"><img src="https://cdn.betterttv.net/emote/5ada077451d4120ea3918426/2x"></a>
+			<a ngbNavLink routerLink="/home">
+				<img class="d-none d-lg-inline" src="https://cdn.betterttv.net/emote/5ada077451d4120ea3918426/2x">
+				<img class="d-sm-inline d-lg-none" src="https://cdn.betterttv.net/emote/5ada077451d4120ea3918426/1x">
+			</a>
 		</li>
 		<li ngbNavItem="home">
-			<a ngbNavLink routerLink="/home"><i class="fa fa-home"></i><span>Home</span></a>
+			<a ngbNavLink routerLink="/home">
+				<i class="fa fa-home"></i>
+				<span class="d-none d-lg-inline">Home</span>
+			</a>
 		</li>
 		<li ngbNavItem="explore">
-			<a ngbNavLink routerLink="/explore" class = "explore"><i class="fa fa-hashtag" aria-hidden="true"></i><span>Explore</span></a>
+			<a ngbNavLink routerLink="/explore" class = "explore">
+				<i class="fa fa-hashtag" aria-hidden="true"></i>
+				<span class="d-none d-lg-inline">Explore</span>
+			</a>
 		</li>
 		<li ngbNavItem="profile">
-			<a ngbNavLink routerLink="/profile"><i class="fa fa-user-circle"></i><span>Profile</span></a>
+			<a ngbNavLink routerLink="/profile">
+				<i class="fa fa-user-circle"></i>
+				<span class="d-none d-lg-inline">Profile</span>
+			</a>
 		</li>
 		<li ngbNavItem="post">
-			<a ngbNavLink (click)="open(content)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i><span>Post</span></a>
+			<a ngbNavLink (click)="open(content)">
+				<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+				<span class="d-none d-lg-inline">Post</span>
+			</a>
 		</li>
 	</ul>
 </nav>
